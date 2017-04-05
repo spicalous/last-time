@@ -14,11 +14,7 @@
 <div class="row">
   <div class="col">
     {{#each model as |event|}}
-      <div class="row">
-        <div class="col">
-          {{event.title}} <small>{{event.lastTimeSince}}</small>
-        </div>
-      </div>
+      {{event-item event=event}}
     {{/each}}
   </div>
 </div>
