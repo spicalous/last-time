@@ -16,10 +16,7 @@
     {{#each model as |event|}}
       <div class="row">
         <div class="col">
-          {{event.title}}
-          {{#each event.lastTimes as |time|}}
-            <small>{{time}}</small>
-          {{/each}}
+          {{event.title}} <small>{{event.mostRecentTime}}</small>
         </div>
       </div>
     {{/each}}

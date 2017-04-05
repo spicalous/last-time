@@ -7,7 +7,7 @@ export default DS.Model.extend({
 
   lastTimes: DS.attr(),
 
-  mostRecentTime: Ember.computed('lastTimes', function() {
+  mostRecentTime: Ember.computed('lastTimes.[]', function() {
     const lastTimes = this.get('lastTimes').slice();
     return lastTimes.sort((a, b) => a - b).pop();
   })
