@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col text-center">
+    <h1 class="display-1">Last Time</h1>
+  </div>
+</div>
+<form {{action "addEvent" on="submit"}}>
+  <div class="form-group">
+    {{input type="text" id="last-time-input" class="form-control"
+            placeholder="When was the last time you did something?"
+            value=lastTimeValue}}
+    <small>E.g. Washed car / Went on holiday / Cleaned room</small>
+  </div>
+</form>
+<div class="row">
+  <div class="col">
+    {{#each model as |event|}}
+      <div class="row">
+        <div class="col">
+          {{event.title}}
+          {{#each event.lastTimes as |time|}}
+            <small>{{time}}</small>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
