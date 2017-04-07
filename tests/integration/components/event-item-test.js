@@ -3,6 +3,7 @@ import { describe, it, beforeEach, afterEach } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import moment from 'moment';
+import Ember from 'ember';
 
 describe('Integration | Component | event item', function() {
 
@@ -51,6 +52,65 @@ describe('Integration | Component | event item', function() {
         this.render(hbs`{{event-item event=event}}`);
 
         assert.strictEqual(this.$().text().trim(), 'An event title ' + scenario.expected);
+      });
+
+    });
+  });
+
+  describe('an event-item component', function() {
+
+    beforeEach(function() {
+      this.set('event', {
+        title: 'An event title',
+        lastTime: moment()
+      });
+    });
+
+    it('displays the delete button on hover', function() {
+      this.render(hbs`{{event-item event=event}}`);
+
+      assert.strictEqual(this.$('button.close').length, 0);
+
+      this.$('div').trigger('mouseover');
+
+      assert.strictEqual(this.$('button.close').length, 1);
+    });
+
+    it('hides the delete button on hovering out', function() {
+      this.render(hbs`{{event-item event=event}}`);
+      this.$('div').trigger('mouseover');
+
+      assert.strictEqual(this.$('button.close').length, 1);
+
+      this.$('div').trigger('mouseleave');
+
+      assert.strictEqual(this.$('button.close').length, 0);
+    });
+
+    it('passes the event to the delete handler', function() {
+      this.set('deleteAssert', (actual) => {
+        assert.deepEqual(actual, this.get('event'));
+      });
+      this.render(hbs`{{event-item event=event onDeleteEvent=deleteAssert}}`);
+
+      this.$('div').trigger('mouseover');
+      this.$('button.close').click();
+    });
+
+    describe('on a touch device', function() {
+
+      let stubDeviceService;
+
+      beforeEach(function() {
+        stubDeviceService = Ember.Service.extend({ isTouch: true });
+        this.register('service:device', stubDeviceService);
+        this.inject.service('device');
+      });
+
+      it('always displays the delete button', function() {
+        this.render(hbs`{{event-item event=event}}`);
+
+        assert.strictEqual(this.$('button.close').length, 1);
       });
 
     });
