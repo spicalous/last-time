@@ -16,6 +16,18 @@ export default Ember.Controller.extend({
 
   noDuplicateEvent: Ember.computed.empty('duplicateEvents'),
 
+  filteredEventsByTitle: Ember.computed('lastTimeValue', function() {
+    const titleFilter = this.get('lastTimeValue');
+    const events = this.get('model');
+
+    if (isBlank(titleFilter)) {
+      return events;
+    } else {
+      const lowercasedTitleFilter = titleFilter.toLowerCase();
+      return events.filter((event) => event.get('title').toLowerCase().indexOf(lowercasedTitleFilter) !== -1);
+    }
+  }),
+
   actions: {
 
     addEvent() {

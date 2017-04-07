@@ -13,7 +13,7 @@
 </form>
 <div class="row">
   <div class="col">
-    {{#each model as |event|}}
+    {{#each filteredEventsByTitle as |event|}}
       {{event-item event=event}}
     {{/each}}
   </div>
