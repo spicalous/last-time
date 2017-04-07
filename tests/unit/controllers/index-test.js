@@ -91,5 +91,13 @@ describe('Unit | Controller | index', function() {
       assert.strictEqual(controller.get('filteredEventsByTitle.length'), 1);
     });
 
+    it('deleting an event removes it from the model', function() {
+      assert.strictEqual(controller.get('model.length'), 4);
+      const firstEvent = controller.get('model.firstObject');
+      Ember.run(() => controller.send('deleteEvent', firstEvent));
+
+      assert.strictEqual(controller.get('model.length'), 3);
+    });
+
   });
 });

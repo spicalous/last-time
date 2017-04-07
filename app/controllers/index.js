@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
 
   noDuplicateEvent: Ember.computed.empty('duplicateEvents'),
 
-  filteredEventsByTitle: Ember.computed('lastTimeValue', function() {
+  filteredEventsByTitle: Ember.computed('lastTimeValue', 'model.[]', function() {
     const titleFilter = this.get('lastTimeValue');
     const events = this.get('model');
 
@@ -52,6 +52,11 @@ export default Ember.Controller.extend({
         this.get('duplicateEvents').forEach((event)  => event.get('lastTimes').pushObject(moment()));
         this.set('lastTimeValue', '');
       }
+    },
+
+    deleteEvent(event) {
+      event.destroyRecord();
+      this.get('model').removeObject(event);
     }
 
   }
