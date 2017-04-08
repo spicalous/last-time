@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col">
-    {{event.title}} <small>{{lastTimeSince}}</small>
+    <span class="event-item_text">
+      {{event.title}} <small>{{lastTimeSince}}</small>
+    </span>
     {{#if deleteButtonVisible}}
       <button type="button" class="close" aria-label="Delete event" {{action "deleteIntent" true}}>
         <span aria-hidden="true">&times;</span>

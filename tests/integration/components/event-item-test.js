@@ -51,7 +51,7 @@ describe('Integration | Component | event item', function() {
         });
         this.render(hbs`{{event-item event=event}}`);
 
-        assert.strictEqual(this.$().text().trim(), 'An event title ' + scenario.expected);
+        assert.strictEqual(this.$('.event-item_text').text().trim(), 'An event title ' + scenario.expected);
       });
 
     });
