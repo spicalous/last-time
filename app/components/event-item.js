@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  classNames: ['event-item'],
+
   device: Ember.inject.service(),
 
   hovered: null,
@@ -15,8 +17,12 @@ export default Ember.Component.extend({
     this.set('hovered', false);
   },
 
-  deleteButtonVisible: Ember.computed('hovered', function() {
-    return this.get('device.isTouch') || this.get('hovered');
+  deleteButtonVisible: Ember.computed('deleteConfirmButtonVisible', 'hovered', function() {
+    return !this.get('deleteConfirmButtonVisible') && (this.get('device.isTouch') || this.get('hovered'));
+  }),
+
+  deleteConfirmButtonVisible: Ember.computed('deleteIntent', function() {
+    return this.get('deleteIntent');
   }),
 
   lastTimeSince: Ember.computed('event.lastTime', function() {
@@ -28,6 +34,10 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+
+    deleteIntent(intent) {
+      this.set('deleteIntent', intent);
+    },
 
     deleteEvent() {
       this.get('onDeleteEvent')(this.get('event'));

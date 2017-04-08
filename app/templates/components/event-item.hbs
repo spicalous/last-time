@@ -2,9 +2,16 @@
   <div class="col">
     {{event.title}} <small>{{lastTimeSince}}</small>
     {{#if deleteButtonVisible}}
-      <button type="button" class="close" aria-label="Delete event" {{action "deleteEvent"}}>
+      <button type="button" class="close" aria-label="Delete event" {{action "deleteIntent" true}}>
         <span aria-hidden="true">&times;</span>
       </button>
+    {{/if}}
+    {{#if deleteConfirmButtonVisible}}
+      {{#click-outside class="close-confirm" action=(action "deleteIntent" false)}}
+        <button type="button" class="btn btn-sm btn-danger" aria-label="Confirm delete" {{action "deleteEvent"}}>
+          <span>Really delete?</span>
+        </button>
+      {{/click-outside}}
     {{/if}}
   </div>
 </div>
