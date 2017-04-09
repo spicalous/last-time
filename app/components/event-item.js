@@ -35,6 +35,14 @@ export default Ember.Component.extend({
 
   actions: {
 
+    setExpanded(expanded) {
+      this.set('expanded', expanded);
+    },
+
+    toggleExpanded() {
+      this.toggleProperty('expanded');
+    },
+
     deleteIntent(intent) {
       this.set('deleteIntent', intent);
     },

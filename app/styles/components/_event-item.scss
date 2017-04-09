@@ -9,8 +9,24 @@
 .event-item {
   min-height: 27px;
 
+  &_text {
+    cursor: pointer;
+    flex: 1;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .close {
+    float: none;
+  }
+
   .close-confirm {
-    float: right;
+
+    button {
+      border-radius: 0px;
+    }
   }
 
 }

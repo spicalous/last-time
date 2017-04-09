@@ -43,6 +43,7 @@
     "ember-simple-auth": "1.2.1",
     "ember-source": "~2.11.0",
     "ember-welcome-page": "^2.0.2",
+    "liquid-fire": "0.27.2",
     "loader.js": "^4.0.10"
   },
   "engines": {

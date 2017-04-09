@@ -1,19 +1,33 @@
-<div class="row">
-  <div class="col">
-    <span class="event-item_text">
-      {{event.title}} <small>{{lastTimeSince}}</small>
-    </span>
-    {{#if deleteButtonVisible}}
-      <button type="button" class="close" aria-label="Delete event" {{action "deleteIntent" true}}>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    {{/if}}
-    {{#if deleteConfirmButtonVisible}}
-      {{#click-outside class="close-confirm" action=(action "deleteIntent" false)}}
-        <button type="button" class="btn btn-sm btn-danger" aria-label="Confirm delete" {{action "deleteEvent"}}>
-          <span>Really delete?</span>
-        </button>
-      {{/click-outside}}
-    {{/if}}
+{{#click-outside action=(action "setExpanded" false)}}
+  <div class="row">
+    <div class="col">
+      <div class="d-flex">
+        <div class="event-item_text" {{action "toggleExpanded"}}>
+          {{event.title}} <small>{{lastTimeSince}}</small>
+        </div>
+        {{#if deleteButtonVisible}}
+          <button type="button" class="close" aria-label="Delete event" {{action "deleteIntent" true}}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        {{/if}}
+        {{#if deleteConfirmButtonVisible}}
+          {{#click-outside class="close-confirm" action=(action "deleteIntent" false)}}
+            <button type="button" class="btn btn-sm btn-danger" aria-label="Confirm delete" {{action
+                "deleteEvent"}}>
+              <span>Really delete?</span>
+            </button>
+          {{/click-outside}}
+        {{/if}}
+      </div>
+    </div>
   </div>
-</div>
+  {{#liquid-if expanded class="fade"}}
+    {{#each event.lastTimes as |time|}}
+      <div class="row">
+        <div class="col">
+          {{moment-format time}}
+        </div>
+      </div>
+    {{/each}}
+  {{/liquid-if}}
+{{/click-outside}}
