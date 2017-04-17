@@ -6,6 +6,7 @@
 <form {{action "addEvent" on="submit"}}>
   <div class="form-group">
     {{input type="text" id="last-time-input" class="form-control"
+            autocomplete="off"
             placeholder="When was the last time you did something?"
             value=lastTimeValue}}
     <small>E.g. Washed car / Went on holiday / Cleaned room</small>
