@@ -20,3 +20,21 @@
     {{/each}}
   </div>
 </div>
+
+{{#if displayInfo}}
+<div id="info" class="text-center" {{action "hideInfo" preventDefault=false}}>
+  <button type="button" class="close" aria-label="Hide info">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <small>
+    Small application designed to help you remember the last time you did something!<br>
+    Currently work in progress. Feel free to contact me at <a href="mailto:benlertlumprasertkul@gmail.com">
+    benlertlumprasertkul@gmail.com</a><br>
+    ---<br>
+    This app does not persist your events. Currently developing the feature to save events in local storage.<br>
+    Subsequently will add features to save events to a user account
+  </small>
+</div>
+{{else}}
+<div id="info-btn" class="text-center" {{action "displayInfo"}}>i</div>
+{{/if}}

@@ -57,7 +57,14 @@ export default Ember.Controller.extend({
     deleteEvent(event) {
       event.destroyRecord();
       this.get('model').removeObject(event);
-    }
+    },
 
+    displayInfo() {
+      this.set('displayInfo', true);
+    },
+
+    hideInfo() {
+      this.set('displayInfo', false);
+    }
   }
 });
