@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { describe, it, beforeEach, afterEach } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import skipPhantom from '../../helpers/skip-phantom';
+import skipPhantom from 'last-time/tests/helpers/skip-phantom';
 import moment from 'moment';
 import Ember from 'ember';
 

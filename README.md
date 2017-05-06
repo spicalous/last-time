@@ -15,21 +15,21 @@ You will need the following things properly installed on your computer.
 * `git clone <repository-url>` this repository
 * `cd last-time`
 * `npm install`
-* `bower install`
 
 ## Running / Development
 
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
 ### Running Tests
 
 * `ember test`
 * `ember test --server`
+
+Note: 
+In order to work around acceptance test being affected by browser local storage: The tests attempt to mock out local 
+storage `setItem`, `removeItem` functions and also use a separate `ember-localstorage-adapter` namespace for retrieving
+`local-storage-events` (see app/adapters/local-storage-event)
 
 ### Building
 
@@ -38,7 +38,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+// TODO
 
 ## Further Reading / Useful Links
 

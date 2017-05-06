@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
     const title = this.get('lastTimeValue');
     const model = this.get('model');
 
-    return model.filter((event) => event.get('title') === title);
+    return model.filter((event) => event.get('title').toUpperCase() === title.toUpperCase());
   }),
 
   noDuplicateEvent: Ember.computed.empty('duplicateEvents'),
@@ -23,15 +23,14 @@ export default Ember.Controller.extend({
     if (isBlank(titleFilter)) {
       return events;
     } else {
-      const lowercasedTitleFilter = titleFilter.toLowerCase();
-      return events.filter((event) => event.get('title').toLowerCase().indexOf(lowercasedTitleFilter) !== -1);
+      const upperCasedTitleFilter = titleFilter.toUpperCase();
+      return events.filter((event) => event.get('title').toUpperCase().indexOf(upperCasedTitleFilter) !== -1);
     }
   }),
 
   actions: {
 
     addEvent() {
-      const store = this.get('store');
       const lastTimeValue = this.get('lastTimeValue');
 
       if (isBlank(lastTimeValue)) {
@@ -40,23 +39,27 @@ export default Ember.Controller.extend({
       }
 
       if (this.get('noDuplicateEvent')) {
-        const event = store.createRecord('event', {
+        this.get('store').createRecord('local-storage-event', {
           title: lastTimeValue,
           lastTimes: Ember.A([ moment() ])
-        });
-
-        this.get('model').pushObject(event);
-        this.set('lastTimeValue', '');
+        })
+        .save()
+        .then(() => this.set('lastTimeValue', ''));
 
       } else {
-        this.get('duplicateEvents').forEach((event)  => event.get('lastTimes').pushObject(moment()));
-        this.set('lastTimeValue', '');
+
+        Ember.RSVP.Promise.all(
+          this.get('duplicateEvents').map((event) => {
+            event.get('lastTimes').pushObject(moment());
+            return event.save();
+          })
+        )
+        .then(() => this.set('lastTimeValue', ''));
       }
     },
 
     deleteEvent(event) {
       event.destroyRecord();
-      this.get('model').removeObject(event);
     },
 
     displayInfo() {
@@ -66,5 +69,6 @@ export default Ember.Controller.extend({
     hideInfo() {
       this.set('displayInfo', false);
     }
+
   }
 });
