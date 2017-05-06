@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
     const title = this.get('lastTimeValue');
     const model = this.get('model');
 
-    return model.filter((event) => event.get('title') === title);
+    return model.filter((event) => event.get('title').toUpperCase() === title.toUpperCase());
   }),
 
   noDuplicateEvent: Ember.computed.empty('duplicateEvents'),
@@ -23,8 +23,8 @@ export default Ember.Controller.extend({
     if (isBlank(titleFilter)) {
       return events;
     } else {
-      const lowercasedTitleFilter = titleFilter.toLowerCase();
-      return events.filter((event) => event.get('title').toLowerCase().indexOf(lowercasedTitleFilter) !== -1);
+      const upperCasedTitleFilter = titleFilter.toUpperCase();
+      return events.filter((event) => event.get('title').toUpperCase().indexOf(upperCasedTitleFilter) !== -1);
     }
   }),
 
