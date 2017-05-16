@@ -31,3 +31,7 @@
     color: $white;
   }
 }
+
+.event-item:not(:last-child) {
+  border-bottom: 1px solid $grey-300;
+}

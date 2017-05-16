@@ -1,13 +1,14 @@
 .modernizr_touchevents {
 
-  .event-item {
-    min-height: 32px;
+  .close-confirm {
+    padding: 2.5px;
   }
 
 }
 
 .event-item {
-  min-height: 27px;
+  min-height: 36px;
+  padding: 4px;
 
   &_text {
     cursor: pointer;
@@ -20,13 +21,6 @@
 
   .close {
     float: none;
-  }
-
-  .close-confirm {
-
-    button {
-      border-radius: 0px;
-    }
   }
 
 }
