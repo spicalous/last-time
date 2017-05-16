@@ -38,7 +38,7 @@ storage `setItem`, `removeItem` functions and also use a separate `ember-localst
 
 ### Deploying
 
-// TODO
+scp -r -P `port-number` dist/* `username`@thelastti.me:/var/www/html
 
 ## Further Reading / Useful Links
 
